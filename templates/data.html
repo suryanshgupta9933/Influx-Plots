@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Plot</title>
+    <title>Anomaly Detection</title>
+    <link rel="stylesheet" type="text/css" href="static/style.css">
   </head>
   <body>
-    <h1>Enter Data</h1>
+    <h1>Anomaly Detection</h1>
     <form method="POST" enctype="multipart/form-data">
       <label for="field">Select Field : </label>
       <select name="field" id="field">
@@ -14,8 +15,11 @@
         {% endfor %}
         </select>
       <br><br>
-      <input type="file" name="file">
-      <br><br>
+      <div class="upload-btn-wrapper">
+        <button class="btn">Choose File</button>
+        <input type="file" name="file" />
+      </div>
+      <br>
       <button type="submit">Submit</button>
     </form>
   </body>
