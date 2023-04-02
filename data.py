@@ -76,7 +76,7 @@ def data_manipulation(df, dates, agent_ids, fields, f):
 # Plotting the Graphs
 
 def plot_graphs(df):
-    plt.figure(figsize=(8, 6))
+    plt.figure(figsize=(7, 5))
     sns_plot = sns.scatterplot(x="New_Time", y="New_Value",
                            hue="Agents", alpha=0.6, s=100, data=df)
     sns_plot.set(xlabel='Time', ylabel='Value')
