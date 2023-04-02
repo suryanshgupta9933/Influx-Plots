@@ -17,10 +17,12 @@
       <br><br>
       <div class="upload-btn-wrapper">
         <button class="btn">Choose File</button>
-        <input type="file" name="file" />
+        <input type="file" name="file" id="file" onchange="updateFileName()" />
       </div>
+      <p id="file-name" class="file-name"></p>
       <br>
       <button type="submit">Submit</button>
     </form>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
   </body>
 </html>
