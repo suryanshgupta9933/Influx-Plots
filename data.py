@@ -6,7 +6,6 @@ import numpy as np
 from matplotlib import pyplot as plt
 from matplotlib.markers import MarkerStyle
 import seaborn as sns
-import plotly.express as px
 import io
 import base64
 from flask import render_template
