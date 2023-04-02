@@ -21,4 +21,4 @@ def index():
         return render_template('data.html', dropdown_options = fields)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()
