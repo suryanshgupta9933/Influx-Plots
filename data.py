@@ -14,8 +14,12 @@ warnings.filterwarnings('ignore')
 
 # Reading and Preprocessing the CSV file
 
-def read_csv_file(file_path):
-    df = pd.read_csv(file_path)
+def read_json_file(file_path):
+    df = pd.read_json(file_path, orient="records")
+    # df = pd.read_csv(file_path)
+    for col in df.columns:
+        if df[col].dtype == 'datetime64[ns, UTC]':
+            df[col] = df[col].astype('str')
     df["dates"] = df["_time"].str[:10]
     df = df.drop(labels=["result", "table", "_start", "_stop",
                          "_measurement", "domain_id", "server"], axis=1)
@@ -23,7 +27,7 @@ def read_csv_file(file_path):
     dates = df.dates.unique()
     agent_ids = df.agent_id.unique()
     agent_ids.sort()
-    fields = ["backup", "restore", "connection"]
+    fields = list(df._field.unique())
     return df, dates, agent_ids, fields
 
 # Transforming the Dataframe into a Dictionary
@@ -46,7 +50,7 @@ def df_to_dict(df, dates, agent_ids, fields):
 
 # Data Manipulation
 
-def data_manipulation(df, dates, agent_ids, fields, f):
+def data_manipulation(df, dates, agent_ids, fields, f, d):
     agentss = []
     datess = []
     fieldss = []
@@ -66,7 +70,7 @@ def data_manipulation(df, dates, agent_ids, fields, f):
     tree = {"Date": datess, "Agents": agentss,
             "Fields": fieldss, "Value": values, "Time": times}
     df = pd.DataFrame.from_dict(tree)
-    df = df.query("Fields == @f")
+    df = df.query("Fields == @f and Date == @d")
     mean_value = np.mean(df.Value)
     mean_time = np.mean(df.Time)
     df["New_Value"] = df["Value"] - mean_value
