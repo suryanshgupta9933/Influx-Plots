@@ -4,6 +4,9 @@ import pandas as pd
 
 app = Flask(__name__)
 app.secret_key = 'secret_key'
+app.config['SESSION_TYPE'] = 'filesystem'
+app.config['max_content_length'] = 100 * 1024 * 1024 
+app.config['client_max_size'] = 100 * 1024 * 1024  
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
