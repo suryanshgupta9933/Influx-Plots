@@ -1,6 +1,6 @@
-import io
 from flask import Flask, request, render_template, session
 from data import read_json_file, data_manipulation, plot_graphs
+import pandas as pd
 
 app = Flask(__name__)
 app.secret_key = 'secret_key'
@@ -15,13 +15,20 @@ def index():
             if not json_file:
                 return 'No file uploaded.', 400
             session['json_file'] = json_file.read()
-            df, dates, agent_ids, fields = read_json_file(io.BytesIO(session['json_file']))
+            df, dates, agent_ids, fields = read_json_file(json_file)
             if not fields:
                 return 'No fields found in the uploaded file.', 400
+            session['df'] = df.to_dict()
+            session['dates'] = dates.tolist()
+            session['agent_ids'] = agent_ids.tolist()
+            session['fields'] = fields
         if 'field' in request.form and 'date' in request.form:
             if 'json_file' not in session:
                 return 'No file uploaded.', 400
-            df, dates, agent_ids, fields = read_json_file(io.BytesIO(session['json_file']))
+            df = pd.DataFrame.from_dict(session['df'])
+            dates = session['dates']
+            agent_ids = session['agent_ids']
+            fields = session['fields']
             field = request.form['field']
             date = request.form['date']
             if not field or not date:
