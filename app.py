@@ -14,8 +14,8 @@ def index():
             json_file = request.files.get('file')
             if not json_file:
                 return 'No file uploaded.', 400
-            session['json_file'] = json_file.read()
-            df, dates, agent_ids, fields = read_json_file(session['json_file'])
+            session['json_file'] = json_file.stream.read().decode("UTF-8")
+            df, dates, agent_ids, fields = read_json_file(str(session['json_file']))
             if not fields:
                 return 'No fields found in the uploaded file.', 400
             session['df'] = df.to_dict()
