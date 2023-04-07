@@ -1,4 +1,4 @@
 bind = '0.0.0.0:8000'
-workers = 4
+workers = 8
 reload = True
-timeout = 60
+timeout = 300
