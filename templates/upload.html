@@ -7,21 +7,14 @@
   <body>
     <h1>Anomaly Detection</h1>
     <form method="POST" enctype="multipart/form-data">
-      <label for="field">Select Field : </label>
-      <select name="field" id="field">
-        <option value=""></option>
-        {% for option in dropdown_options %}
-        <option value="{{ option }}">{{ option }}</option>
-        {% endfor %}
-        </select>
-      <br><br>
       <div class="upload-btn-wrapper">
-        <button class="btn">Choose File</button>
+        <button class="btn">Choose json file</button>
         <input type="file" name="file" id="file" onchange="updateFileName()" />
       </div>
       <p id="file-name" class="file-name"></p>
       <br>
-      <button type="submit">Submit</button>
+      <button type="submit">Upload</button>
+      <br>
     </form>
     <script src="{{ url_for('static', filename='script.js') }}"></script>
   </body>

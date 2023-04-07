@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Anomaly Detection</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='data.css') }}">
+  </head>
+  <body>
+    <h1>Anomaly Detection</h1>
+    <form method="POST" enctype="multipart/form-data">
+      <label for="field">Select Field : </label>
+      <select name="field" id="field">
+        <option value=""></option>
+        {% for option in fields %}
+        <option value="{{ option }}">{{ option }}</option>
+        {% endfor %}
+        </select>
+      <br>
+      <label for="date">Select Date : </label>
+        <select name="date" id="date">
+          <option value=""></option>
+          {% for option in dates %}
+          <option value="{{ option }}">{{ option }}</option>
+          {% endfor %}
+        </select>
+      <br><br>
+      <button type="submit">Submit</button>
+    </form>
+  </body>
+</html>
