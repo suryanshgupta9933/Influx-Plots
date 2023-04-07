@@ -74,11 +74,11 @@ input[type="file"] {
 }
 
 input[type="file"] + .btn {
-  display: block;
+  display: inline-block; /* Change to inline-block to show filename on the same line */
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  max-width: 100%;
+  max-width: 50%; /* Reduce max-width to make space for filename */
 }
 
 button[type="submit"] {
@@ -101,7 +101,12 @@ button[type="submit"]:hover {
 }
 
 .file-name {
-  font-size: 16px;
+  font-size: 20px;
   color: #eee;
-  margin-top: 10px;
+  margin-top: 5px;
+  display: inline-block; /* Add this to display filename on the same line */
+  max-width: 50%; /* Adjust the width as necessary */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-left: 25px; /* Add margin to separate filename from the button */
 }
